@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\GameObjectExtension.cs" />
+    <Compile Include="Assets\LayerManager.cs" />
     <Compile Include="Assets\PieceBehaviour.cs" />
     <Compile Include="Assets\PieceManager.cs" />
     <Reference Include="UnityEditor.StandardEvents">

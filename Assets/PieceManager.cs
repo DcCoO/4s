@@ -7,7 +7,9 @@ public class PieceManager : MonoBehaviour {
     public static PieceManager instance;
 
     public GameObject piece;
+    public GameObject patternPiece;
     public GameObject moveArea;
+    
 
     private List<GameObject> pieces;
 
@@ -27,8 +29,30 @@ public class PieceManager : MonoBehaviour {
                     xv[i] * (moveArea.rectTransform().rect.width / 2),
                     yv[j] * (moveArea.rectTransform().rect.height / 2)
                 );
+                pieces[2 * i + j].rectTransform().sizeDelta = new Vector2(
+                    patternPiece.rectTransform().rect.height,
+                    patternPiece.rectTransform().rect.height
+                );
                 pieces[2 * i + j].GetComponent<PieceBehaviour>().Init(moveArea.rectTransform(), CheckContact);
+                pieces[2 * i + j].name = "Piece " + (2 * i + j).ToString();
             }
+        }
+        
+    }
+
+    public void Fix() {
+        for(int i = 0; i < 4; i++) {
+            pieces[i].rectTransform().sizeDelta = new Vector2(
+                patternPiece.rectTransform().rect.height,
+                patternPiece.rectTransform().rect.height
+            );  
+            continue;
+            pieces[i].rectTransform().rect.Set(
+                pieces[i].rectTransform().rect.x,
+                pieces[i].rectTransform().rect.y,
+                patternPiece.rectTransform().rect.height,
+                patternPiece.rectTransform().rect.height
+            );
         }
     }
 
@@ -43,9 +67,9 @@ public class PieceManager : MonoBehaviour {
         int a = -1, b = -1;
         float minDist = 99999999f, dist;
         for(int i = 0; i < pieces.Count - 1; i++) {
-            for(int j = 1; j < pieces.Count; j++) {
+            for(int j = i + 1; j < pieces.Count; j++) {
                 if(RectOverlaps(pieces[i].rectTransform(), pieces[j].rectTransform())){
-                    dist = (pieces[i].rectTransform().anchoredPosition - pieces[i].rectTransform().anchoredPosition).magnitude;
+                    dist = DistBetweenRects(pieces[i].rectTransform(), pieces[j].rectTransform());
                     if(dist < minDist) {
                         minDist = dist;
                         a = i; b = j;
@@ -59,8 +83,21 @@ public class PieceManager : MonoBehaviour {
         checking = false;
     }
 
+    public float DistBetweenRects(RectTransform rectTrans1, RectTransform rectTrans2) {
+        Rect r1 = GetWorldSpaceRect(rectTrans1);
+        Rect r2 = GetWorldSpaceRect(rectTrans2);
+        return (r1.position - r2.position).magnitude;
+    }
+
     public bool RectOverlaps(RectTransform rectTrans1, RectTransform rectTrans2) {
-        return rectTrans1.rect.Overlaps(rectTrans2.rect);
+        return GetWorldSpaceRect(rectTrans1).Overlaps(GetWorldSpaceRect(rectTrans2));
+    }
+
+    Rect GetWorldSpaceRect(RectTransform rt) {
+        var r = rt.rect;
+        r.center = rt.TransformPoint(r.center);
+        r.size = rt.TransformVector(r.size);
+        return r;
     }
 
     // Use this for initialization
@@ -76,14 +113,18 @@ public class PieceManager : MonoBehaviour {
 
 [CustomEditor(typeof(PieceManager))]
 public class PieceManagerEditor: Editor {
-
+    bool spawn = false;
     public override void OnInspectorGUI() {
         base.DrawDefaultInspector();
 
         PieceManager pm = target as PieceManager;
 
         if (GUILayout.Button("Spawn")) {
-            pm.FirstSpawn();
+            if (!spawn) {
+                pm.FirstSpawn();
+                spawn = true;
+            }
+            else pm.Fix();
         }
     }
 }

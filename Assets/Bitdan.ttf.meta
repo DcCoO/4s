@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1c92fc244e9fd8645b19028c012c0e7c
+guid: 6cb5a5d1e05da9a4a8d28ba5abab49b7
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -11,7 +11,8 @@ TrueTypeFontImporter:
   fontName: Bitdan
   fontNames:
   - Bitdan
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 1c92fc244e9fd8645b19028c012c0e7c, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
