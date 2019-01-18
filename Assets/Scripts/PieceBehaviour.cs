@@ -33,6 +33,7 @@ public class PieceBehaviour : MonoBehaviour {
         );
         StartCoroutine(Born());
         text.text = value.ToString();
+        shadow.rectTransform().sizeDelta = new Vector2(Screen.width / 6, Screen.width / 6);
 
         //important
         this.value = value;
@@ -45,8 +46,9 @@ public class PieceBehaviour : MonoBehaviour {
         StartCoroutine(IncreaseScale());
         touchCallback(gameObject);
     }
-
+    
     public void TouchDrag() {
+        /*
         Vector2 currPos = Input.mousePosition;
         Vector2 diff = currPos - mousePos;
         
@@ -54,7 +56,14 @@ public class PieceBehaviour : MonoBehaviour {
             Mathf.Clamp(rt.anchoredPosition.x + diff.x, -bounds.x, bounds.x),
             Mathf.Clamp(rt.anchoredPosition.y + diff.y, -bounds.y, bounds.y)
         );
-        mousePos = currPos;
+        mousePos = currPos;*/
+        Vector2 localpoint;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(moveArea, Input.mousePosition, Camera.main, out localpoint);
+        
+        rt.anchoredPosition = new Vector2(
+            Mathf.Clamp(localpoint.x, -bounds.x, bounds.x),
+            Mathf.Clamp(localpoint.y, -bounds.y, bounds.y)
+        );
     }
 
     public void TouchUp() {
@@ -100,7 +109,7 @@ public class PieceBehaviour : MonoBehaviour {
         Color c = shadow.GetComponent<Image>().color;
         while (pieceImage.localScale.x < 1.25f) {
             pieceImage.localScale = Vector2.Lerp(Vector2.one, 1.25f * Vector2.one, porc);
-            shadow.rectTransform().localScale = Vector2.Lerp(0.8f * Vector2.one, 1.1f * Vector2.one, porc);
+            shadow.rectTransform().localScale = Vector2.Lerp(Vector2.one, 1.6f * Vector2.one, porc);
             c.a = Mathf.Lerp(0, 0.3f, porc);
             shadow.GetComponent<Image>().color = c;
             porc += duration;
@@ -114,7 +123,7 @@ public class PieceBehaviour : MonoBehaviour {
         Color c = shadow.GetComponent<Image>().color;
         while (pieceImage.localScale.x > 1) {
             pieceImage.localScale = Vector2.Lerp(1.25f * Vector2.one, Vector2.one, porc);
-            shadow.rectTransform().localScale = Vector2.Lerp(1.1f * Vector2.one, 0.8f * Vector2.one, porc);
+            shadow.rectTransform().localScale = Vector2.Lerp(1.6f * Vector2.one, Vector2.one, porc);
             c.a = Mathf.Lerp(0.3f, 0, porc);
             shadow.GetComponent<Image>().color = c;
             porc += duration;

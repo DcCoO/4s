@@ -1,5 +1,9 @@
 ﻿using System.Collections.Generic;
+
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
+
 using UnityEngine;
 
 public class PieceManager : MonoBehaviour {
@@ -169,9 +173,13 @@ public class PieceManager : MonoBehaviour {
             patternPiece.rectTransform().rect.height
         );
         star.anchoredPosition = Vector2.zero;
+
+        FirstSpawn();
     }
 
 }
+
+#if UNITY_EDITOR
 
 [CustomEditor(typeof(PieceManager))]
 public class PieceManagerEditor: Editor {
@@ -190,3 +198,5 @@ public class PieceManagerEditor: Editor {
         }
     }
 }
+
+#endif

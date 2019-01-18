@@ -13,9 +13,7 @@ public class BrokenPiece : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         dir = new Vector2(-1 + 2 * Random.value, -1 + 2 * Random.value).normalized;
-        speed = 2 * (-1 + 2 * Random.value);
-        var sz = Random.value;
-        rt.sizeDelta = new Vector2(5 + sz * 10, 5 + sz * 10);
+        speed = rt.sizeDelta.x;
         StartCoroutine(Go());
 	}
 

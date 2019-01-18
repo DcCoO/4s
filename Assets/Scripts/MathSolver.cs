@@ -10,7 +10,7 @@ public class MathSolver {
     public static bool CanSolve(Operation op, int a, int b = -1) {
         if (op == Operation.SUM) return a + b <= MAX;
         if (op == Operation.DIFFERENCE) return true;
-        if (op == Operation.PRODUCT) return a + 1 < MAX / b;
+        if (op == Operation.PRODUCT) return a == 0 || b == 0 || a + 1 < MAX / b;
         if (op == Operation.DIVISION) return a == 0 || b == 0 || (a % b == 0) || (b % a == 0);
         if (op == Operation.POWER) return PowerChecker(a, b);
         if (op == Operation.CONCAT) return a != 44 || b != 44;

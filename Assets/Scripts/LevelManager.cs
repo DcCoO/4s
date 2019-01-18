@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour {
     public Text levelNumber;
     public RectTransform dialog, undoButton, restartButton, backButton, restartButton2, nextButton, levelPiece;
     public Image shadow, moveArea;
-    public GameObject star, arrow;
+    public GameObject star;
     public Sprite rightBaloon;
     public Image dialogImage;
 
@@ -38,8 +38,7 @@ public class LevelManager : MonoBehaviour {
     public void CheckResult() {
         if(PieceManager.instance.pieces.Count == 1) {
             if(PieceManager.instance.pieces[0].GetComponent<PieceBehaviour>().value == level) {
-                print("END GAME");
-                //check for star
+                ActionManager.instance.TurnButtons(false, false, false);
                 StartCoroutine(EndGame());
             }
         }
@@ -49,6 +48,8 @@ public class LevelManager : MonoBehaviour {
 
     IEnumerator EndGame() {
         gotStar = ActionManager.instance.GetNumOp() == best[level];
+        Memory.SetCurrentLevel(Mathf.Max(level + 1, Memory.GetCurrentLevel()));
+        if (gotStar) Memory.SetStar(level);
         float time = 30;
         //desativa clique da peça, manda ela pro meio e some com os botoes, liga a sombra com alpha 0
         PieceBehaviour pb = PieceManager.instance.pieces[0].GetComponent<PieceBehaviour>();
@@ -107,12 +108,14 @@ public class LevelManager : MonoBehaviour {
 
         //nasce balao com ponta na peça nova e nascem botoes        
 
-        arrow.SetActive(false);
+        //arrow.SetActive(false);
         oldSprite = dialogImage.sprite;
         phrase.text = "Are you ready for the next challenge?";
         dialogImage.sprite = rightBaloon;
 
         if(level != 100) StartCoroutine(ExtraPiece.instance.Appear());
+
+        ActionManager.instance.TurnButtons(false, true, true);
 
         for (float i = 0; i <= time; i++) {
             if (level != 100) nextButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
@@ -153,7 +156,7 @@ public class LevelManager : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
 
         //some com sombra, volta botoes antigos, volta balao antigo, seta novo level, ativa ponta
-        arrow.SetActive(true);
+        //arrow.SetActive(true);
         dialogImage.sprite = oldSprite;
         phrase.text = $"Can you turn these 4 pieces into {level}?";
         Color c1 = shadow.color; Color c2 = moveArea.color;
@@ -172,12 +175,13 @@ public class LevelManager : MonoBehaviour {
         star.rectTransform().localScale = Vector2.one;
         levelNumber.text = $"{level}";
         ExtraPiece.instance.MoveOut();
+        ActionManager.instance.Restart();
     }
 
     public void ResetLevel() {
         if (readyToNext) {
             readyToNext = false;
-            Memory.SetPlayLevel(++level);
+            //Memory.SetPlayLevel(++level);
             StartCoroutine(PrepareSameLevel());
         }
     }
@@ -186,14 +190,14 @@ public class LevelManager : MonoBehaviour {
     IEnumerator PrepareSameLevel() {
         float time = 30;
         //some com balao velho, move peça nova, some botoes novos
-        StartCoroutine(ExtraPiece.instance.Replace());
-        Vector2 sp = levelPiece.anchoredPosition;
-        Vector2 ep = new Vector2(-levelPiece.rect.width, sp.y);
+        StartCoroutine(ExtraPiece.instance.Disappear());
+        //Vector2 sp = levelPiece.anchoredPosition;
+        //Vector2 ep = new Vector2(-levelPiece.rect.width, sp.y);
         for (float i = 0; i <= time; i++) {
             nextButton.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
             restartButton2.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
             dialog.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
-            levelPiece.anchoredPosition = Vector2.Lerp(sp, ep, i / time);
+            //levelPiece.anchoredPosition = Vector2.Lerp(sp, ep, i / time);
             star.rectTransform().localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
             yield return null;
         }
@@ -201,7 +205,7 @@ public class LevelManager : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
 
         //some com sombra, volta botoes antigos, volta balao antigo, seta novo level, ativa ponta
-        arrow.SetActive(true);
+        //arrow.SetActive(true);
         dialogImage.sprite = oldSprite;
         phrase.text = $"Can you turn these 4 pieces into {level}?";
         Color c1 = shadow.color; Color c2 = moveArea.color;
@@ -215,11 +219,12 @@ public class LevelManager : MonoBehaviour {
         }
 
         //desativa a estrela
-        levelPiece.anchoredPosition = sp;
+        //levelPiece.anchoredPosition = sp;
         star.SetActive(false);
         star.rectTransform().localScale = Vector2.one;
-        levelNumber.text = $"{level}";
-        ExtraPiece.instance.MoveOut();
+        //levelNumber.text = $"{level}";
+        //ExtraPiece.instance.MoveOut();
+        ActionManager.instance.Restart();
     }
 
     public void ReturnHome() {

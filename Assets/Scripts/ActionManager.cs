@@ -9,7 +9,7 @@ public class ActionManager : MonoBehaviour {
     public static ActionManager instance;
 
     //ref para botoes
-    public Button undo, restart;
+    public Button undo, restart, back;
 
     [HideInInspector] public Stack<Operation> operations = new Stack<Operation>();
     [HideInInspector] public Stack<GameState> states = new Stack<GameState>();
@@ -21,7 +21,6 @@ public class ActionManager : MonoBehaviour {
     public void SaveState(Operation op) {
         undo.interactable = true;
         operations.Push(op);
-        var x = PieceManager.instance.GetPieces();
         states.Push(new GameState(PieceManager.instance.GetPieces()));
     }
 
@@ -34,6 +33,7 @@ public class ActionManager : MonoBehaviour {
 
     public void Restart() {
         PieceManager.instance.Clear();
+        OperationController.instance.Hide();
         Clear();
         undo.interactable = false;
         Rect r = PieceManager.instance.moveArea.rectTransform().rect;
@@ -41,6 +41,12 @@ public class ActionManager : MonoBehaviour {
         PieceManager.instance.Spawn(4, true, new Vector2(0.25f * r.width, -0.25f * r.height));
         PieceManager.instance.Spawn(4, true, new Vector2(-0.25f * r.width, 0.25f * r.height));
         PieceManager.instance.Spawn(4, true, new Vector2(0.25f * r.width, 0.25f * r.height));
+    }
+
+    public void TurnButtons(bool undoState, bool restartState, bool backState) {
+        undo.interactable = undoState;
+        restart.interactable = restartState;
+        back.interactable = backState;
     }
 
     public void Undo() {

@@ -36,6 +36,15 @@ public class ExtraPiece : MonoBehaviour {
         }
     }
 
+    public IEnumerator Disappear() {
+        Vector2 beginPos = rt.anchoredPosition;
+        Vector2 endPos = new Vector2(parent.rect.width / 2 + rt.rect.height + 0.1f, rt.anchoredPosition.y);
+        for (float i = 0, time = 30; i <= time; i++) {
+            rt.anchoredPosition = Vector2.Lerp(beginPos, endPos, i / time);
+            yield return null;
+        }
+    }
+
     public IEnumerator Replace() {
         Vector2 beginPos = rt.anchoredPosition;
         Vector2 endPos = new Vector2(0, rt.anchoredPosition.y);

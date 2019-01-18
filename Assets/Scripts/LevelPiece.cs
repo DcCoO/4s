@@ -6,31 +6,25 @@ using UnityEngine.UI;
 
 public class LevelPiece : MonoBehaviour {
 
-    public Image piece, star;
+    public Image piece;
     public Text number;
     [HideInInspector] public int value;
 
     private bool locked;
 
-    public Sprite lockedPiece, freePiece, starHole, starReal;
+    public Sprite lockedPiece, normalPiece, starPiece;
 	
     public void Init(int val, bool open, bool hasStar) {
         locked = !open;
         if (open) {
             number.text = val.ToString();
             value = val;
-            piece.sprite = freePiece;
-            if (hasStar) {
-                star.sprite = starReal;
-                star.color = Color.white;
-            }
-            else star.sprite = starHole;
+            piece.sprite = hasStar ? starPiece : normalPiece;
         }
         else {
             value = val;
             number.enabled = false;
             piece.sprite = lockedPiece;
-            star.color = Color.clear;
         }
     }
 
