@@ -11,7 +11,6 @@ public class PieceBehaviour : MonoBehaviour {
     public RectTransform moveArea;
 
     [HideInInspector] public RectTransform rt;
-    private Vector2 mousePos;
 
     [HideInInspector] public Action<GameObject> touchCallback, releaseCallback;
     private Vector2 bounds;
@@ -42,21 +41,11 @@ public class PieceBehaviour : MonoBehaviour {
 
     public void TouchDown() {
         transform.SetAsLastSibling();
-        mousePos = Input.mousePosition;
         StartCoroutine(IncreaseScale());
         touchCallback(gameObject);
     }
     
     public void TouchDrag() {
-        /*
-        Vector2 currPos = Input.mousePosition;
-        Vector2 diff = currPos - mousePos;
-        
-        rt.anchoredPosition = new Vector2(
-            Mathf.Clamp(rt.anchoredPosition.x + diff.x, -bounds.x, bounds.x),
-            Mathf.Clamp(rt.anchoredPosition.y + diff.y, -bounds.y, bounds.y)
-        );
-        mousePos = currPos;*/
         Vector2 localpoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(moveArea, Input.mousePosition, Camera.main, out localpoint);
         
