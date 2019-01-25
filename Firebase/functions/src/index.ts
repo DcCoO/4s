@@ -22,7 +22,7 @@ export const add_user = functions.https.onRequest((request, response) => {
 
         //const now = admin.firestore.FieldValue.serverTimestamp();
         //request.body = {email, status}
-        const email = "daniel";
+        const email = request.body.email.toLowerCase();
         console.log("received email: " + email);
         const us_status = "trial"
         db.collection("users").doc(email).set({

@@ -76,12 +76,15 @@
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\MainMenu.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\Pay.cs" />
     <Compile Include="Assets\FallingPiece.cs" />
+    <Compile Include="Assets\Friend.cs" />
+    <Compile Include="Assets\FriendLoader.cs" />
     <Compile Include="Assets\GridResizer.cs" />
     <Compile Include="Assets\ImageResizer.cs" />
     <Compile Include="Assets\LevelLoader.cs" />
     <Compile Include="Assets\PieceSpawner.cs" />
     <Compile Include="Assets\Scripts\ActionManager.cs" />
     <Compile Include="Assets\Scripts\FBManager.cs" />
+    <Compile Include="Assets\Scripts\FirebaseManager.cs" />
     <Compile Include="Assets\Scripts\GameObjectExtension.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\LevelPiece.cs" />
