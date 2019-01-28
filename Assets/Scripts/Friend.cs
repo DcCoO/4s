@@ -14,4 +14,17 @@ public class Friend : MonoBehaviour {
         nickname.text = fbName;
         ID = fbID;
     }
+
+    public void SetName(string name) {
+        nickname.text = name;
+    }
+
+    public void SetImage(Sprite img) {
+        photo.sprite = img;
+        photo.gameObject.SetActive(true);
+
+        print("Deve ter ligado a img");
+    }
+
+    
 }

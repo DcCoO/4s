@@ -27,4 +27,28 @@ public class Memory {
     public static void SetPlayLevel(int value) {
         PlayerPrefs.SetInt("PlayLevel", value);
     }
+
+    public static string GetFacebookID() {
+        return PlayerPrefs.GetString("FacebookID");
+    }
+
+    public static void SetFacebookID(string id) {
+        PlayerPrefs.SetString("FacebookID", id);
+    }
+
+    public static string GetFacebookName() {
+        return PlayerPrefs.GetString("FacebookName");
+    }
+
+    public static void SetFacebookName(string name) {
+        PlayerPrefs.SetString("FacebookName", name);
+    }
+
+    public static int GetScore() {
+        return PlayerPrefs.GetInt("Score", 0);
+    }
+
+    public static void SetScore(int score) {
+        PlayerPrefs.SetInt("Score", score);
+    }
 }

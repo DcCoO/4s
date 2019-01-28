@@ -12,38 +12,59 @@ admin.initializeApp();
 
 const db = admin.firestore();
 
+/*
 const now = function () {
     return admin.firestore.FieldValue.serverTimestamp();
-}
+}*/
 
 export const add_user = functions.https.onRequest((request, response) => {
 
     corsHandler(request, response, () => {
+		//request.body = {id, name, score}
 
-        //const now = admin.firestore.FieldValue.serverTimestamp();
-        //request.body = {email, status}
-        const email = request.body.email.toLowerCase();
-        console.log("received email: " + email);
-        const us_status = "trial"
-        db.collection("users").doc(email).set({
-            name: "Jeronimo",
-            auth_code: "ABC123",
-            email_verified: false,
-            email: email,
-            begin_trial: now(),
-            status: us_status,
-            last_login: now()
+        db.collection("users").doc(request.body.id).set({
+            name: request.body.name,
+			score: request.body.score
         })
-            .then(function () {
-                console.log("User successfully added!");
-                response.json([])
-            })
-            .catch(function (error) {
-                console.error("Error adding user: ", error);
-                response.json(error);
-            });
+        .then(function () {
+            console.log("User successfully added!");
+            response.json([])
+        })
+        .catch(function (error) {
+            console.error("Error adding user: ", error);
+            response.json(error);
+        });
     });
 });
+
+
+
+export const get_users = functions.https.onRequest((request, response) => {
+    corsHandler(request, response, () => {
+		//request.body = {ids}
+
+        const ids = request.body.ids;        
+		var friends: { [id: string] : object; } = {};
+
+		db.collection('users').get()
+		.then(
+			(results) => {
+				results.forEach((doc) => {
+					if(ids.includes(doc.id)){
+						friends[doc.id] = doc.data();
+					}
+				});
+				console.log("Friends retrieved successfully!");
+				response.json(friends);
+			}			
+		)
+		.catch(function (error) {
+            console.error("Error retrieving friends: ", error);
+            response.send(error)
+        });
+    });
+});
+
 
 
 /*
