@@ -45,10 +45,32 @@ public class Memory {
     }
 
     public static int GetScore() {
-        return PlayerPrefs.GetInt("Score", 0);
+        if(System.DateTime.Today.Day != 1) {
+            SetResetScore(true);
+            return PlayerPrefs.GetInt("Score", 0);
+        }
+        else {
+            if (GetResetScore()) {
+                PlayerPrefs.SetInt("Score", 0);
+                SetResetScore(false);
+                return 0;
+            }
+            else {
+                return PlayerPrefs.GetInt("Score", 0);
+            }
+        }        
     }
 
     public static void SetScore(int score) {
-        PlayerPrefs.SetInt("Score", score);
+        int currScore = GetScore();
+        PlayerPrefs.SetInt("Score", Mathf.Max(score, currScore));
+    }
+
+    private static bool GetResetScore() {
+        return PlayerPrefsX.GetBool("ResetScore");
+    }
+
+    private static void SetResetScore(bool value) {
+        PlayerPrefsX.SetBool("ResetScore", value);
     }
 }

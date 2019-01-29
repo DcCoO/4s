@@ -139,7 +139,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   photo: {fileID: 114790962923417774}
   nickname: {fileID: 114220109858212558}
-  ID: 
 --- !u!114 &114509797705648212
 MonoBehaviour:
   m_ObjectHideFlags: 1

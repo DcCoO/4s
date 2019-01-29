@@ -7,23 +7,20 @@ public class Friend : MonoBehaviour {
 
     public Image photo;
     public Text nickname;
-    public string ID;
-	// Use this for initialization
-	public void Init(Sprite fbPhoto, string fbName, string fbID) {
-        photo.sprite = fbPhoto;
-        nickname.text = fbName;
-        ID = fbID;
-    }
+    public FBFriend friend;
 
-    public void SetName(string name) {
-        nickname.text = name;
-    }
+    //public bool initialized = false;
 
+	public void Init() {
+        photo.sprite = friend.photo;
+        nickname.text = friend.name + $" ({friend.score})";
+        photo.gameObject.SetActive(true);
+        print("init with " + friend.name + ", " + friend.score);
+    }
+    
     public void SetImage(Sprite img) {
         photo.sprite = img;
         photo.gameObject.SetActive(true);
-
-        print("Deve ter ligado a img");
     }
 
     

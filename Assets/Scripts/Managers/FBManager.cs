@@ -32,8 +32,8 @@ public class FBManager : MonoBehaviour {
         yield return new WaitUntil(() => FB.IsLoggedIn);
         loginButton.SetActive(false);
         StartCoroutine(StoreMyUserID());
+        
         GetFriendsPlaying();
-
     }
 
     IEnumerator StoreMyUserID() {
@@ -41,9 +41,9 @@ public class FBManager : MonoBehaviour {
         string query = "/me";
         FB.API(query, HttpMethod.GET, result => {
             var dictionary = (Dictionary<string, object>)Facebook.MiniJSON.Json.Deserialize(result.RawResult);
-            print("Nome: " + (string)dictionary["name"]);
-            print("Nome: " + (string)dictionary["id"]);
-            FirebaseManager.instance.AddUser((string)dictionary["id"], (string)dictionary["name"], Memory.GetScore());
+            Memory.SetFacebookName((string)dictionary["name"]);
+            Memory.SetFacebookID((string)dictionary["id"]);
+            FirebaseManager.instance.AddUser((string)dictionary["id"], (string)dictionary["name"]);
         });
     }
 
@@ -76,44 +76,43 @@ public class FBManager : MonoBehaviour {
         );
     }
 
-    public bool searching = false;
-    Dictionary<string, FBFriend> dt;
+    public Dictionary<string, FBFriend> friends;
 
     public void GetFriendsPlaying() {
-        searching = false;
 
-        dt = new Dictionary<string, FBFriend>();
+        friends = new Dictionary<string, FBFriend>();
 
         string query = "/me/friends";
-        
+
         FB.API(query, HttpMethod.GET, result => {
             var dictionary = (Dictionary<string, object>)Facebook.MiniJSON.Json.Deserialize(result.RawResult);
             var friendsList = (List<object>)dictionary["data"];
+
+
             foreach (var dict in friendsList) {
                 string name = (string)((Dictionary<string, object>)dict)["name"];
                 string id = (string)((Dictionary<string, object>)dict)["id"];
-
+               
                 FBFriend fbf = new FBFriend();
                 fbf.name = name; fbf.id = id;
-                dt[id] = fbf;
-                getSprite((Dictionary<string, object>)dict, id);
-                //FriendLoader.instance.friends[0].nickname.text = (string)((Dictionary<string, object>)dict)["name"];
-                //FriendLoader.instance.friends[0].ID = (string)((Dictionary<string, object>)dict)["id"];
+                friends[id] = fbf;
+                getSprite(id);
             }
-            searching = false;
+
+            FBFriend me = new FBFriend();
+            me.name = Memory.GetFacebookName(); me.id = Memory.GetFacebookID(); me.score = Memory.GetScore();
+            friends[me.id] = me;
+            getSprite(me.id);
+
+            FirebaseManager.instance.GetFriends();
         });
     }
 
-    void getSprite(Dictionary<string, object> user, string id) {
-        FB.API("https://graph.facebook.com/" + user["id"] + "/picture?type=large", HttpMethod.GET, delegate (IGraphResult result) {
-
-            //FriendLoader.instance.friends[i].photo.sprite = Sprite.Create(result.Texture, new Rect(Vector2.zero,
-            //new Vector2(result.Texture.width, result.Texture.height)), Vector2.zero);
-            dt[id].photo = Sprite.Create(result.Texture, new Rect(Vector2.zero,
+    public void getSprite(string id) {
+        FB.API("https://graph.facebook.com/" + id + "/picture?type=large", HttpMethod.GET, delegate (IGraphResult result) {
+            friends[id].photo = Sprite.Create(result.Texture, new Rect(Vector2.zero,
             new Vector2(result.Texture.width, result.Texture.height)), Vector2.zero);
-
-            //FriendLoader.instance.friends[0].SetImage(Sprite.Create(result.Texture, new Rect(Vector2.zero,
-            //new Vector2(result.Texture.width, result.Texture.height)), Vector2.zero));
+            FriendLoader.instance.LoadPhoto(friends[id].photo, id);
         });
     }
     
@@ -121,6 +120,7 @@ public class FBManager : MonoBehaviour {
 
 public class FBFriend {
     public string name, id;
+    public int score;
     public Sprite photo = null;
     public FBFriend() { }
 }

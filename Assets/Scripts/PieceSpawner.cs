@@ -23,7 +23,7 @@ public class PieceSpawner : MonoBehaviour {
     }
 
     public void PlayFriend() {
-
+        SceneManager.LoadScene("Ranking");
     }
 
     IEnumerator Spawn() {

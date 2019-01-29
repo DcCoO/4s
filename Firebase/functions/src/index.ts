@@ -42,8 +42,12 @@ export const add_user = functions.https.onRequest((request, response) => {
 export const get_users = functions.https.onRequest((request, response) => {
     corsHandler(request, response, () => {
 		//request.body = {ids}
+		console.log("IDS: ");
 
-        const ids = request.body.ids;        
+        const ids = request.body.ids;    
+		for (var i = 0; i < ids.length; i++) {
+			console.log(ids[i]);
+		}
 		var friends: { [id: string] : object; } = {};
 
 		db.collection('users').get()
