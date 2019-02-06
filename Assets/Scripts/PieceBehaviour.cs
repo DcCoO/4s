@@ -72,7 +72,18 @@ public class PieceBehaviour : MonoBehaviour {
 
     public void Explode() {
         for(int i = 0; i < 30; i++) {
-            Instantiate(brokenPiece, moveArea);
+            Instantiate(brokenPiece, moveArea).GetComponent<RectTransform>().anchoredPosition = rt.anchoredPosition;
+        }
+        Destroy(gameObject);
+    }
+
+    public void StarExplode() {
+        Sprite star = TrialManager.instance.star.GetComponent<Image>().sprite;
+        for (int i = 0; i < 30; i++) {
+            GameObject g = brokenPiece;
+            g = Instantiate(g, moveArea);
+            g.GetComponent<RectTransform>().anchoredPosition = rt.anchoredPosition;
+            g.GetComponent<Image>().sprite = star;
         }
         Destroy(gameObject);
     }

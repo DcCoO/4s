@@ -6,6 +6,7 @@ Assets/Scenes/Main.unity
 Assets/Scenes/Levels.unity
 Assets/Scenes/Game.unity
 Assets/Scenes/Ranking.unity
+Assets/Scenes/Trial.unity
 SceneListEnd?
 2178d356ea45036d81bad6e719b91cc5 Assembly-CSharp.dll:.TestReporter
 8ac0f33ccfc524f6bad5db302661b770 Assembly-CSharp.dll:.Operator
@@ -102,6 +103,7 @@ e90403eeda069970e0b9de1533de13a6 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 16da51d1b62ef6d4ee1849350434023b UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:Facebook.Unity.Example.Pay
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.TextResizer
+a46d158a48951a8e9bd59f1ce70564f8 Assembly-CSharp.dll:.TrialManager
 486cd95c82d8305219c352c06b776e1f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 9e61f3535f3c55760a1cedfbd114f4af UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
 754551afe4f2531f58476bf14c510657 UnityEngine.Timeline.dll:UnityEngine.Timeline.AnimationPlayableAsset
@@ -144,9 +146,11 @@ dd95d948a2b29c539c49fbd1559d65f6 Assembly-CSharp.dll:.BrokenPiece
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:Facebook.Unity.Example.DialogShare
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:Facebook.Unity.Example.GraphRequest
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:Facebook.Unity.Example.LogView
+1d2224ed8506832f8dc78c13e77d4c15 Assembly-CSharp.dll:.Clock
 ac27bac6cd3bb3cb8d42302fe4a436d6 Assembly-CSharp.dll:.AudioController
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:Facebook.Unity.Example.ConsoleBase
 f16835701e71dd5d6fb1fed4b7aff1d8 Unity.TextMeshPro.dll:TMPro.TMP_Asset
+bebc2e8b10abc3bbfc9800a528e4fc0d Assembly-CSharp.dll:.AdManager
 2c68c890231b088e1bd22d317647e636 Assembly-CSharp.dll:.Friend
 ae84e930018280397333b2d846864a3b Assembly-CSharp.dll:.PieceManager
 ea9e67e33878b2730c3ca098b6709157 Assembly-CSharp.dll:.LevelManager
@@ -204,6 +208,7 @@ e033f131358cea5a0eabf9561e781deb UnityEngine.TestRunner.dll:UnityEngine.TestTool
 28a95668dd28649297d595834fe8417e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
 28a95668dd28649297d595834fe8417e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
 9a936d0e760c4f74287e68456ad8268a Assembly-CSharp.dll:.ExtraPiece
+486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:GoogleMobileAds.Common.MobileAdsEventExecutor
 d75dc834c5dec688db75a55a1724c90f UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 486cd95c82d8305219c352c06b776e1f UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
 e1ea12ca952c81d81a9a21fdf34446ed UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
@@ -221,3 +226,4 @@ e04611b8715e6833d2bd7010fc6be10b Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 e1423129f5102a36042460f0fadd719e Facebook.Unity.Settings.dll:Facebook.Unity.Settings.FacebookSettings
 93307bd34e39d73fd24e00ec39c25a91 Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:Facebook.Unity.Example.AppRequests
+3431aed17449675049f448a0b4f29135 Assembly-CSharp.dll:.TrialPlay

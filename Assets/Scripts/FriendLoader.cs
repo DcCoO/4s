@@ -54,10 +54,6 @@ public class FriendLoader : MonoBehaviour {
     }
 
 
-
-
-
-
     public void ReturnHome() {
         SceneManager.LoadScene("Main");
     }

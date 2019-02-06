@@ -26,7 +26,8 @@ public class Operator : MonoBehaviour {
         ActionManager.instance.SaveState(operation);
         PieceManager.instance.Spawn(v1, v2, operation);
         OperationController.instance.Hide();
-        LevelManager.instance.CheckResult();
+        if (LevelManager.instance != null) LevelManager.instance.CheckResult();
+        else TrialManager.instance.CheckResult();
     }
     
 }

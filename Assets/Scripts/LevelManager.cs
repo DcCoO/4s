@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour {
 
     public static LevelManager instance;
 
-    public int level;
+    public int level = 1;
     public Text phrase;
     public Text levelNumber;
     public RectTransform dialog, undoButton, restartButton, backButton, restartButton2, nextButton, levelPiece;
@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour {
     void Start() {
         level = Memory.GetPlayLevel();
         levelNumber.text = level.ToString();
-        phrase.text = $"Can you turn these 4 pieces into {level}?";
+        phrase.text = $"Can you turn all these pieces into {level}?";
 
     }
 
@@ -158,7 +158,7 @@ public class LevelManager : MonoBehaviour {
         //some com sombra, volta botoes antigos, volta balao antigo, seta novo level, ativa ponta
         //arrow.SetActive(true);
         dialogImage.sprite = oldSprite;
-        phrase.text = $"Can you turn these 4 pieces into {level}?";
+        phrase.text = $"Can you turn all these pieces into {level}?";
         Color c1 = shadow.color; Color c2 = moveArea.color;
         for (float i = 0; i <= time; i++) {
             restartButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
@@ -207,7 +207,7 @@ public class LevelManager : MonoBehaviour {
         //some com sombra, volta botoes antigos, volta balao antigo, seta novo level, ativa ponta
         //arrow.SetActive(true);
         dialogImage.sprite = oldSprite;
-        phrase.text = $"Can you turn these 4 pieces into {level}?";
+        phrase.text = $"Can you turn all these pieces into {level}?";
         Color c1 = shadow.color; Color c2 = moveArea.color;
         for (float i = 0; i <= time; i++) {
             restartButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
@@ -231,10 +231,9 @@ public class LevelManager : MonoBehaviour {
         SceneManager.LoadScene("Levels");
     }
 
-   
+    //TODO texto de cada uma das fases
 
-
-    static int[] best = { 0,
+    public static int[] best = { 0,
         1, 3, 3, 3, 3,
         3, 2, 3, 3, 2,   //10
         3, 2, 3, 4, 2,
@@ -255,5 +254,28 @@ public class LevelManager : MonoBehaviour {
         4, 5, 1, 5, 4,   //90
         4, 3, 6, 5, 4,
         3, 4, 4, 4, 4    //100
+    };
+
+    public static int[,] numbers = { {0, 0},
+        {44, 44}, {1, 1}, {12, 4}, {4, 0}, {20, 4},
+        {4, 2}, {11, 4}, {12, 4}, {8, 1}, {40, 4},
+        {44, 4}, {48, 4}, {11, 2}, {12, 2}, {11, 4},
+        {16, 1}, {16, 1}, {22, 4}, {20, 1}, {40, 2},
+        {11, 10}, {44, 2}, {46, 2}, {16, 8}, {24, 1},
+        {22, 4}, {24, 3}, {44, 16}, {24, 5}, {44, 14},
+        {75, 44}, {16, 16}, {11, 3}, {44, 10}, {24, 11},
+        {44, 8}, {40, 3}, {40, 2}, {40, 1}, {44, 4},
+        {40, 1}, {44, 2}, {44, 1}, {44, 1}, {44, 1},
+        {44, 2}, {44, 3}, {44, 2}, {44, 5}, {44, 6},
+        {44, 7}, {44, 8}, {55, 2}, {44, 10}, {40, 4},
+        {44, 12}, {44, 13}, {44, 14}, {55, 4}, {44, 16},
+        {105, 44}, {66, 4}, {252, 4}, {44, 20}, {260, 4},
+        {44, 22}, {75, 8}, {64, 4}, {276, 4}, {66, 4},
+        {284, 4}, {44, 28}, {292, 4}, {444, 6}, {55, 20},
+        {80, 4}, {308, 4}, {48, 4}, {316, 4}, {20, 4},
+        {4, 3}, {820, 10}, {75, 8}, {44, 40}, {88, 3},
+        {344, 4}, {55, 32}, {44, 44}, {45, 44}, {66, 24},
+        {11, 2}, {88, 4}, {96, 3}, {96, 2}, {96, 1},
+        {48, 2}, {96, 1}, {88, 10}, {55, 44}, {25, 4}
     };
 }

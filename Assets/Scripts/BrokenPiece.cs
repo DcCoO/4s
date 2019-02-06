@@ -14,6 +14,7 @@ public class BrokenPiece : MonoBehaviour {
 	void Start () {
         dir = new Vector2(-1 + 2 * Random.value, -1 + 2 * Random.value).normalized;
         speed = rt.sizeDelta.x;
+        rt.sizeDelta *= (1 + Random.value);
         StartCoroutine(Go());
 	}
 

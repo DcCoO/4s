@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 public class Memory {
 
@@ -72,5 +73,54 @@ public class Memory {
 
     private static void SetResetScore(bool value) {
         PlayerPrefsX.SetBool("ResetScore", value);
+    }
+
+
+    public static void ForceInitHint() {
+        System.Random rnd = new System.Random();
+        string s = "xxx012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012";
+        int k = 101;
+        int n = 3;
+        string result = "";
+        for (int i = 0; i < k; i++) {
+            string current = s.Substring((i * n), n);
+            string shuffled = string.Join("", current.OrderBy(x => rnd.Next()));
+            result += shuffled;
+        }
+        PlayerPrefs.SetString("Hint", s);        
+    }
+
+    public static void InitHint() {
+        if(PlayerPrefs.GetString("Hint", string.Empty) == string.Empty) {
+            System.Random rnd = new System.Random();
+            string s = "xxx012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012";
+            int k = 101;
+            int n = 3;
+            string result = "";
+            for (int i = 0; i < k; i++) {
+                string current = s.Substring((i * n), n);
+                string shuffled = string.Join("", current.OrderBy(x => rnd.Next()));
+                result += shuffled;
+            }
+            PlayerPrefs.SetString("Hint", s);
+        }
+    }
+
+    //returns the type of hint for the #hintNum hint button
+    public static int GetHintIndex(int lvl, int hintNum) {
+        char[] c = GetHintString().ToCharArray();
+        return c[3 * lvl + (hintNum - 1)] - '0';
+    }
+
+    public static void SetHintIndex(int lvl, int hintNum) {
+        char[] c = GetHintString().ToCharArray();
+        if (c[3 * lvl + (hintNum - 1)] == '0') c[3 * lvl + (hintNum - 1)] = '3';
+        if (c[3 * lvl + (hintNum - 1)] == '1') c[3 * lvl + (hintNum - 1)] = '4';
+        if (c[3 * lvl + (hintNum - 1)] == '2') c[3 * lvl + (hintNum - 1)] = '5';
+        PlayerPrefs.SetString("Hint", new string(c));
+    }
+
+    private static string GetHintString() {
+        return PlayerPrefs.GetString("Hint");
     }
 }
