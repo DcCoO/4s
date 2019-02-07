@@ -19,13 +19,17 @@ public class HintButton : MonoBehaviour {
 
     private int level;
     private void Start() {
+        videoColor = videoImage.color;
         level = LevelManager.instance.level;
+        print("LEVEL INICIA " + level);
     }
     
     //TODO fix update hint, not changing when level passes
     public void UpdateHint() {
         hasHint = false;
-        videoColor = videoImage.color;
+        button.SetActive(true);
+        hint.SetActive(false);
+        videoImage.color = videoColor;
         hintIndex = Memory.GetHintIndex(Memory.GetPlayLevel(), hintNum);
         if (hintIndex > 2) { ActivateHint(); }
     }
@@ -37,6 +41,7 @@ public class HintButton : MonoBehaviour {
     void Update() {
         if(level != LevelManager.instance.level) {
             level = LevelManager.instance.level;
+            print("LEVEL MUDA PARA " + level);
             UpdateHint();
         }
         hintButton.interactable = AdManager.instance.isLoaded;

@@ -5028,6 +5028,7 @@ MonoBehaviour:
   dialog: {fileID: 1222226690}
   undoButton: {fileID: 61344040}
   restartButton: {fileID: 434244228}
+  hintButton: {fileID: 1806358919}
   backButton: {fileID: 387343240}
   restartButton2: {fileID: 1427046487}
   nextButton: {fileID: 2059205042}

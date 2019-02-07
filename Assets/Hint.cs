@@ -28,7 +28,7 @@ public class Hint : MonoBehaviour {
         if (on) {
             while (rt.localScale.x < 1) {
                 rt.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, time);
-                time += Time.deltaTime * 2;
+                time += Time.deltaTime * 3;
                 yield return null;
             }
             background.enabled = on;
@@ -36,7 +36,7 @@ public class Hint : MonoBehaviour {
         else {
             while (rt.localScale.x > 0) {
                 rt.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, time);
-                time += Time.deltaTime * 2;
+                time += Time.deltaTime * 3;
                 yield return null;
             }
             background.enabled = on;

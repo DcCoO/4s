@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour {
     public int level = 1;
     public Text phrase;
     public Text levelNumber;
-    public RectTransform dialog, undoButton, restartButton, backButton, restartButton2, nextButton, levelPiece;
+    public RectTransform dialog, undoButton, restartButton, hintButton, backButton, restartButton2, nextButton, levelPiece;
     public Image shadow, moveArea;
     public GameObject star;
     public Sprite rightBaloon;
@@ -69,6 +69,7 @@ public class LevelManager : MonoBehaviour {
             dialog.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
             undoButton.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
             restartButton.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
+            hintButton.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
             backButton.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
             c2.a = Mathf.Lerp(1, 0, i / time); moveArea.color = c2;
             c1.a = Mathf.Lerp(0, 0.7f, i / time); shadow.color = c1;
@@ -162,6 +163,7 @@ public class LevelManager : MonoBehaviour {
         Color c1 = shadow.color; Color c2 = moveArea.color;
         for (float i = 0; i <= time; i++) {
             restartButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
+            hintButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
             undoButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
             dialog.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
             c2.a = Mathf.Lerp(0, 1, i / time); moveArea.color = c2;
@@ -211,6 +213,7 @@ public class LevelManager : MonoBehaviour {
         Color c1 = shadow.color; Color c2 = moveArea.color;
         for (float i = 0; i <= time; i++) {
             restartButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
+            hintButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
             undoButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
             dialog.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
             c2.a = Mathf.Lerp(0, 1, i / time); moveArea.color = c2;
