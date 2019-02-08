@@ -86,17 +86,14 @@ public class TrialManager : MonoBehaviour {
     private Sprite oldSprite;
     public IEnumerator EndGame() {
 
-        float time = 0;
-
         for(int i = 0; i < PieceManager.instance.pieces.Count; i++) {
             PieceManager.instance.pieces[i].GetComponent<PieceBehaviour>().Explode();
             yield return null;
         }
 
         Color c1 = shadow.color;
-        while(time < 1) {
-            c1.a = Mathf.Lerp(0, 0.7f, time); shadow.color = c1;
-            time += Time.deltaTime;
+        for (float i = 0; i <= 1.05; i += Time.deltaTime) {
+            c1.a = Mathf.Lerp(0, 0.7f, i); shadow.color = c1;
             yield return null;
         }
 
@@ -107,47 +104,6 @@ public class TrialManager : MonoBehaviour {
         yield return new WaitForSeconds(1);
 
         SceneManager.LoadScene("Ranking");
-    }
-
-    public void ResetLevel() {
-        if (readyToNext) {
-            readyToNext = false;
-            //Memory.SetPlayLevel(++level);
-            StartCoroutine(PrepareSameLevel());
-        }
-    }
-
-
-    IEnumerator PrepareSameLevel() {
-        float time = 30;
-        for (float i = 0; i <= time; i++) {
-            nextButton.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
-            restartButton2.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
-            dialog.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
-            //levelPiece.anchoredPosition = Vector2.Lerp(sp, ep, i / time);
-            star.rectTransform().localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(0.5f);
-
-        //some com sombra, volta botoes antigos, volta balao antigo, seta novo level, ativa ponta
-        //arrow.SetActive(true);
-        dialogImage.sprite = oldSprite;
-        phrase.text = $"Can you turn these 4 pieces into {level}?";
-        Color c1 = shadow.color; Color c2 = moveArea.color;
-        for (float i = 0; i <= time; i++) {
-            restartButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
-            undoButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
-            dialog.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
-            c2.a = Mathf.Lerp(0, 1, i / time); moveArea.color = c2;
-            c1.a = Mathf.Lerp(0.7f, 0, i / time); shadow.color = c1;
-            yield return null;
-        }
-
-        star.SetActive(false);
-        star.rectTransform().localScale = Vector2.one;
-        ActionManager.instance.Restart();
     }
 
     public void ReturnHome() {

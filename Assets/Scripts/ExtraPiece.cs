@@ -30,8 +30,8 @@ public class ExtraPiece : MonoBehaviour {
     public IEnumerator Appear() {
         Vector2 beginPos = rt.anchoredPosition;
         Vector2 endPos = new Vector2(parent.rect.width/2 - 0.25f * rt.rect.height, rt.anchoredPosition.y);
-        for(float i = 0, time = 30; i <= time; i++) {
-            rt.anchoredPosition = Vector2.Lerp(beginPos, endPos, i / time);
+        for (float i = 0; i <= 1.05; i += Time.deltaTime * 2) {
+            rt.anchoredPosition = Vector2.Lerp(beginPos, endPos, i);
             yield return null;
         }
     }
@@ -39,8 +39,8 @@ public class ExtraPiece : MonoBehaviour {
     public IEnumerator Disappear() {
         Vector2 beginPos = rt.anchoredPosition;
         Vector2 endPos = new Vector2(parent.rect.width / 2 + rt.rect.height + 0.1f, rt.anchoredPosition.y);
-        for (float i = 0, time = 30; i <= time; i++) {
-            rt.anchoredPosition = Vector2.Lerp(beginPos, endPos, i / time);
+        for (float i = 0; i <= 1.05; i += Time.deltaTime * 2) {
+            rt.anchoredPosition = Vector2.Lerp(beginPos, endPos, i);
             yield return null;
         }
     }
@@ -48,8 +48,8 @@ public class ExtraPiece : MonoBehaviour {
     public IEnumerator Replace() {
         Vector2 beginPos = rt.anchoredPosition;
         Vector2 endPos = new Vector2(0, rt.anchoredPosition.y);
-        for (float i = 0, time = 30; i <= time; i++) {
-            rt.anchoredPosition = Vector2.Lerp(beginPos, endPos, i / time);
+        for (float i = 0; i <= 1.05; i += Time.deltaTime * 2) {
+            rt.anchoredPosition = Vector2.Lerp(beginPos, endPos, i);
             yield return null;
         }
     }

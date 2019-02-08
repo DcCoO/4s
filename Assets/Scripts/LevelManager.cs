@@ -50,8 +50,6 @@ public class LevelManager : MonoBehaviour {
         gotStar = ActionManager.instance.GetNumOp() == best[level];
         Memory.SetCurrentLevel(Mathf.Max(level + 1, Memory.GetCurrentLevel()));
         if (gotStar) Memory.SetStar(level);
-        float time = 30;
-        //TODO change for to use Time.deltaTime (here and in TrialManager if there is any)
         //desativa clique da peça, manda ela pro meio e some com os botoes, liga a sombra com alpha 0
         PieceBehaviour pb = PieceManager.instance.pieces[0].GetComponent<PieceBehaviour>();
         pb.touchCallback = pb.releaseCallback = DoNothing;
@@ -60,20 +58,21 @@ public class LevelManager : MonoBehaviour {
         Color c1 = shadow.color; Color c2 = moveArea.color;
 
         //move peça para o meio
-        for (float i = 0; i <= time; i++) {
-            pb.rt.anchoredPosition = Vector2.Lerp(begin, Vector2.zero, i / time);
+        for (float i = 0; i <= 1.05; i += Time.deltaTime * 2) {
+            pb.rt.anchoredPosition = Vector2.Lerp(begin, Vector2.zero, i);
             yield return null;
         }
 
+
         //some tudo e liga sombra
-        for (float i = 0; i <= time; i++) {
-            dialog.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
-            undoButton.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
-            restartButton.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
-            hintButton.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
-            backButton.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
-            c2.a = Mathf.Lerp(1, 0, i / time); moveArea.color = c2;
-            c1.a = Mathf.Lerp(0, 0.7f, i / time); shadow.color = c1;
+        for (float i = 0; i <= 1.05; i += Time.deltaTime * 2) {
+            dialog.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i);
+            undoButton.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i);
+            restartButton.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i);
+            hintButton.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i);
+            backButton.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i);
+            c2.a = Mathf.Lerp(1, 0, i); moveArea.color = c2;
+            c1.a = Mathf.Lerp(0, 0.7f, i); shadow.color = c1;
             yield return null;
         }
 
@@ -93,16 +92,16 @@ public class LevelManager : MonoBehaviour {
         else {
             phrase.text = win_phrase[r.Next(0, win_phrase.Length)];
         }
-        for (float i = 0; i <= time; i++) {
-            dialog.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
+        for (float i = 0; i <= 1.05; i += Time.deltaTime * 2) {
+            dialog.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i);
             yield return null;
         }
 
         yield return new WaitForSeconds(1f);
 
         //diminui balao de fala
-        for (float i = 0; i <= time; i++) {
-            dialog.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
+        for (float i = 0; i <= 1.05; i += Time.deltaTime * 2) {
+            dialog.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i);
             yield return null;
         }
 
@@ -119,11 +118,11 @@ public class LevelManager : MonoBehaviour {
 
         ActionManager.instance.TurnButtons(false, true, true);
 
-        for (float i = 0; i <= time; i++) {
-            if (level != 100) nextButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
-            restartButton2.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
-            dialog.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
-            backButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
+        for (float i = 0; i <= 1.05; i += Time.deltaTime * 2) {
+            if (level != 100) nextButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i);
+            restartButton2.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i);
+            dialog.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i);
+            backButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i);
             yield return null;
         }
 
@@ -141,17 +140,16 @@ public class LevelManager : MonoBehaviour {
 
     private Sprite oldSprite;
     IEnumerator PrepareNextLevel() {
-        float time = 30;
         //some com balao velho, move peça nova, some botoes novos
         StartCoroutine(ExtraPiece.instance.Replace());
         Vector2 sp = levelPiece.anchoredPosition;
         Vector2 ep = new Vector2(- levelPiece.rect.width, sp.y);
-        for (float i = 0; i <= time; i++) {
-            nextButton.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
-            restartButton2.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
-            dialog.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
-            levelPiece.anchoredPosition = Vector2.Lerp(sp, ep, i / time);
-            star.rectTransform().localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
+        for (float i = 0; i <= 1.05; i += Time.deltaTime * 2) {
+            nextButton.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i);
+            restartButton2.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i);
+            dialog.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i);
+            levelPiece.anchoredPosition = Vector2.Lerp(sp, ep, i);
+            star.rectTransform().localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i);
             yield return null;
         }
 
@@ -162,13 +160,13 @@ public class LevelManager : MonoBehaviour {
         dialogImage.sprite = oldSprite;
         phrase.text = $"Can you turn all these pieces into {level}?";
         Color c1 = shadow.color; Color c2 = moveArea.color;
-        for (float i = 0; i <= time; i++) {
-            restartButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
-            hintButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
-            undoButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
-            dialog.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
-            c2.a = Mathf.Lerp(0, 1, i / time); moveArea.color = c2;
-            c1.a = Mathf.Lerp(0.7f, 0, i / time); shadow.color = c1;
+        for (float i = 0; i <= 1.05; i += Time.deltaTime * 2) {
+            restartButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i);
+            hintButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i);
+            undoButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i);
+            dialog.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i);
+            c2.a = Mathf.Lerp(0, 1, i); moveArea.color = c2;
+            c1.a = Mathf.Lerp(0.7f, 0, i); shadow.color = c1;
             yield return null;
         }
 
@@ -191,17 +189,16 @@ public class LevelManager : MonoBehaviour {
 
 
     IEnumerator PrepareSameLevel() {
-        float time = 30;
         //some com balao velho, move peça nova, some botoes novos
         StartCoroutine(ExtraPiece.instance.Disappear());
         //Vector2 sp = levelPiece.anchoredPosition;
         //Vector2 ep = new Vector2(-levelPiece.rect.width, sp.y);
-        for (float i = 0; i <= time; i++) {
-            nextButton.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
-            restartButton2.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
-            dialog.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
+        for (float i = 0; i <= 1.05; i += Time.deltaTime * 2) {
+            nextButton.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i);
+            restartButton2.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i);
+            dialog.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i);
             //levelPiece.anchoredPosition = Vector2.Lerp(sp, ep, i / time);
-            star.rectTransform().localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / time);
+            star.rectTransform().localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i);
             yield return null;
         }
 
@@ -212,13 +209,13 @@ public class LevelManager : MonoBehaviour {
         dialogImage.sprite = oldSprite;
         phrase.text = $"Can you turn all these pieces into {level}?";
         Color c1 = shadow.color; Color c2 = moveArea.color;
-        for (float i = 0; i <= time; i++) {
-            restartButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
-            hintButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
-            undoButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
-            dialog.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i / time);
-            c2.a = Mathf.Lerp(0, 1, i / time); moveArea.color = c2;
-            c1.a = Mathf.Lerp(0.7f, 0, i / time); shadow.color = c1;
+        for (float i = 0; i <= 1.05; i += Time.deltaTime * 2) {
+            restartButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i);
+            hintButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i);
+            undoButton.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i);
+            dialog.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, i);
+            c2.a = Mathf.Lerp(0, 1, i); moveArea.color = c2;
+            c1.a = Mathf.Lerp(0.7f, 0, i); shadow.color = c1;
             yield return null;
         }
 
