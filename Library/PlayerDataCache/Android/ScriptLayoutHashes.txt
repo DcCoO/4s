@@ -144,6 +144,7 @@ dfd33ff9ae3ce8d7ca1f22b475ec2387 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 96f3ea9f23b6f08e60710ebb4af49174 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
 dd95d948a2b29c539c49fbd1559d65f6 Assembly-CSharp.dll:.BrokenPiece
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:Facebook.Unity.Example.DialogShare
+3431aed17449675049f448a0b4f29135 Assembly-CSharp.dll:.TrialPlay
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:Facebook.Unity.Example.GraphRequest
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:Facebook.Unity.Example.LogView
 1d2224ed8506832f8dc78c13e77d4c15 Assembly-CSharp.dll:.Clock
@@ -153,7 +154,7 @@ f16835701e71dd5d6fb1fed4b7aff1d8 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 bebc2e8b10abc3bbfc9800a528e4fc0d Assembly-CSharp.dll:.AdManager
 2c68c890231b088e1bd22d317647e636 Assembly-CSharp.dll:.Friend
 ae84e930018280397333b2d846864a3b Assembly-CSharp.dll:.PieceManager
-ea9e67e33878b2730c3ca098b6709157 Assembly-CSharp.dll:.LevelManager
+e01c43454af935587fc7ff48677cf607 Assembly-CSharp.dll:.LevelManager
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.ImageResizer
 486cd95c82d8305219c352c06b776e1f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.FirebaseManager
@@ -176,6 +177,7 @@ ea9e67e33878b2730c3ca098b6709157 Assembly-CSharp.dll:.LevelManager
 486cd95c82d8305219c352c06b776e1f Facebook.Unity.dll:Facebook.Unity.Editor.Dialogs.MockShareDialog
 eaf0bcdb10d442a4029d615f41d09957 Unity.TextMeshPro.dll:TMPro.TextContainer
 6e26400f5ae1d49f2a97d9765c967579 Assembly-CSharp.dll:.PieceBehaviour
+a335d9aa1e4a7f1877db1683f3179e6a Assembly-CSharp.dll:.HintButton
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:Facebook.Unity.Example.MainMenu
 201273fb4f889724fb090164b7d6c657 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 486cd95c82d8305219c352c06b776e1f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
@@ -220,10 +222,10 @@ aac9c55ae7ba4b95b852a7d9c191acd1 Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 ad0f0c5b18910b9a88d35f73c50704c3 Assembly-CSharp.dll:.LevelPiece
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:Facebook.Unity.Example.AppInvites
 e04611b8715e6833d2bd7010fc6be10b Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
+185cddc374e1e254869ff207a4a3987b Assembly-CSharp.dll:.Hint
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.Rotate
 2f9af06a78208a67db480e9bfed4a076 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 9318334b30e9f195f573b2ce00154b95 Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 e1423129f5102a36042460f0fadd719e Facebook.Unity.Settings.dll:Facebook.Unity.Settings.FacebookSettings
 93307bd34e39d73fd24e00ec39c25a91 Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:Facebook.Unity.Example.AppRequests
-3431aed17449675049f448a0b4f29135 Assembly-CSharp.dll:.TrialPlay

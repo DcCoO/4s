@@ -78,31 +78,17 @@ public class Memory {
 
     public static void ForceInitHint() {
         System.Random rnd = new System.Random();
-        string s = "xxx012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012";
-        int k = 101;
-        int n = 3;
-        string result = "";
-        for (int i = 0; i < k; i++) {
-            string current = s.Substring((i * n), n);
-            string shuffled = string.Join("", current.OrderBy(x => rnd.Next()));
-            result += shuffled;
+        string s = "xxx";
+        string[] perm = { "012", "021", "102", "120", "201", "210" };
+        for (int i = 0; i < 100; i++) {
+            s += perm[rnd.Next(0, 6)];
         }
-        PlayerPrefs.SetString("Hint", s);        
+        PlayerPrefs.SetString("Hint", s);
     }
 
     public static void InitHint() {
         if(PlayerPrefs.GetString("Hint", string.Empty) == string.Empty) {
-            System.Random rnd = new System.Random();
-            string s = "xxx012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012012";
-            int k = 101;
-            int n = 3;
-            string result = "";
-            for (int i = 0; i < k; i++) {
-                string current = s.Substring((i * n), n);
-                string shuffled = string.Join("", current.OrderBy(x => rnd.Next()));
-                result += shuffled;
-            }
-            PlayerPrefs.SetString("Hint", s);
+            ForceInitHint();
         }
     }
 

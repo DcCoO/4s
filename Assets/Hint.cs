@@ -12,7 +12,7 @@ public class Hint : MonoBehaviour {
     private bool popping = false;
     private void Awake() {
 
-        //Memory.InitHint();
+        //Memory.ForceInitHint();
         Memory.InitHint();
     }
 

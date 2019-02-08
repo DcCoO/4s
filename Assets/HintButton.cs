@@ -18,10 +18,14 @@ public class HintButton : MonoBehaviour {
     private int hintIndex;
 
     private int level;
+
     private void Start() {
+        //print(Memor)
         videoColor = videoImage.color;
-        level = LevelManager.instance.level;
-        print("LEVEL INICIA " + level);
+        level = Memory.GetPlayLevel();
+        hintIndex = Memory.GetHintIndex(level, hintNum);
+        //print($"[START] hintIndex do botao {hintNum} eh {hintIndex} (level = {level})");
+        if (hintIndex > 2) UnlockHint();
     }
     
     //TODO fix update hint, not changing when level passes
@@ -31,7 +35,8 @@ public class HintButton : MonoBehaviour {
         hint.SetActive(false);
         videoImage.color = videoColor;
         hintIndex = Memory.GetHintIndex(Memory.GetPlayLevel(), hintNum);
-        if (hintIndex > 2) { ActivateHint(); }
+        //print($"[UPDATE] hintIndex do botao {hintNum} eh {hintIndex} (level = {level}");
+        if (hintIndex > 2) { UnlockHint(); }
     }
 
     private Color videoColor;
@@ -39,32 +44,39 @@ public class HintButton : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+
         if(level != LevelManager.instance.level) {
+            //print($"BOTAO {hintNum} CHAMOU UPDATE: {level} vs {LevelManager.instance.level}");
             level = LevelManager.instance.level;
-            print("LEVEL MUDA PARA " + level);
             UpdateHint();
         }
         hintButton.interactable = AdManager.instance.isLoaded;
         if (hintButton.IsInteractable()) videoImage.color = videoColor;
         else videoImage.color = Color.white;
 
-        if (videoOver) ActivateHint();
+        if (videoOver) UnlockHint();
     }
 
     //hint 0: operation number
     //hint 1: last 2 numbers
     //hint 2: written hint
     public void ActivateHint() {
-        print("ENTROU E TEM HINT? " + hasHint);
+        AdManager.instance.Set(null, null, UnlockHint);
+        AdManager.instance.ShowAd();
+        //UnlockHint();
+    }
+
+    void UnlockHint() {
         if (hasHint) return;
         int index = hintIndex % 3;
         if (index == 0) {
-            print($"Entrando no if no botao {hintNum} com index {index} no level {Memory.GetPlayLevel()}");
             hintText.text = $"The best solution has {LevelManager.best[Memory.GetPlayLevel()]} operations.";
         }
-        else {
-            print($"Entrando no else no botao {hintNum} com index {index} no level {Memory.GetPlayLevel()}");
+        else if (index == 1) {
             hintText.text = $"The best solution uses {LevelManager.numbers[Memory.GetPlayLevel(), 0]} and {LevelManager.numbers[Memory.GetPlayLevel(), 1]}.";
+        }
+        else {
+            hintText.text = LevelManager.hints[Memory.GetPlayLevel()];
         }
         hint.SetActive(true);
         button.SetActive(false);
