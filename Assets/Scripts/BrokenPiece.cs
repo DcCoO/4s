@@ -14,16 +14,16 @@ public class BrokenPiece : MonoBehaviour {
 	void Start () {
         dir = new Vector2(-1 + 2 * Random.value, -1 + 2 * Random.value).normalized;
         speed = rt.sizeDelta.x;
-        rt.sizeDelta *= (1 + Random.value);
+        rt.sizeDelta *= (0.7f + Random.value);
         StartCoroutine(Go());
 	}
 
     IEnumerator Go() {
-        Color c = img.color;
-        while (c.a > 0) {
+        Color s = img.color;
+        Color e = img.color; e.a = 0;
+        for (float i = 0; i <= 1.05f; i += Time.deltaTime * 2f) {
+            img.color = Color.Lerp(s, e, i);
             rt.anchoredPosition += speed * dir;
-            c.a -= 0.05f;
-            img.color = c;
             yield return null;
         }
         Destroy(gameObject);

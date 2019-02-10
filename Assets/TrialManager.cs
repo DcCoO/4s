@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Random = System.Random;
 
 public class TrialManager : MonoBehaviour {
 
@@ -85,6 +84,8 @@ public class TrialManager : MonoBehaviour {
 
     private Sprite oldSprite;
     public IEnumerator EndGame() {
+
+        OperationController.instance.Hide();
 
         for(int i = 0; i < PieceManager.instance.pieces.Count; i++) {
             PieceManager.instance.pieces[i].GetComponent<PieceBehaviour>().Explode();

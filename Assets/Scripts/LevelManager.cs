@@ -295,6 +295,8 @@ public class LevelManager : MonoBehaviour {
 
 
     //÷ × º 
+    
+    //3¹ = 3    3² = 3 x 
     public static string[] hints = { "",
         "Concatenation doesn't count as operation, use it.",
         "4 ÷ 4 = 1",

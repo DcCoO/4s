@@ -7,6 +7,7 @@ Assets/Scenes/Levels.unity
 Assets/Scenes/Game.unity
 Assets/Scenes/Ranking.unity
 Assets/Scenes/Trial.unity
+Assets/Scenes/HowToPlay.unity
 SceneListEnd?
 2178d356ea45036d81bad6e719b91cc5 Assembly-CSharp.dll:.TestReporter
 8ac0f33ccfc524f6bad5db302661b770 Assembly-CSharp.dll:.Operator
@@ -229,3 +230,5 @@ e04611b8715e6833d2bd7010fc6be10b Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 e1423129f5102a36042460f0fadd719e Facebook.Unity.Settings.dll:Facebook.Unity.Settings.FacebookSettings
 93307bd34e39d73fd24e00ec39c25a91 Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:Facebook.Unity.Example.AppRequests
+f2592d48deb7f8c26d4e160194896c0f Assembly-CSharp.dll:.AnchorAdjust
+486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.Mover

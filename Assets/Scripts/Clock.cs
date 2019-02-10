@@ -20,6 +20,7 @@ public class Clock : MonoBehaviour {
 
         if(time > 1) {
             StartCoroutine(TrialManager.instance.EndGame());
+            transform.SetAsLastSibling();
         }
 	}
 

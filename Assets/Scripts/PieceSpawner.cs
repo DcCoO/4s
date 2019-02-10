@@ -26,6 +26,10 @@ public class PieceSpawner : MonoBehaviour {
         SceneManager.LoadScene("Ranking");
     }
 
+    public void HowToPlay() {
+        SceneManager.LoadScene("HowToPlay");
+    }
+
     IEnumerator Spawn() {
         while (true) {
             Instantiate(piece, t);

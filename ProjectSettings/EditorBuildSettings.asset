@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Trial.unity
     guid: e1f8fa2920283384ca9c2d61a6c81a4a
+  - enabled: 1
+    path: Assets/Scenes/HowToPlay.unity
+    guid: 00650c6f05dbc52449afdb98d7ba6933
   - enabled: 0
     path: Assets/Scenes/Facebook test.unity
     guid: c8f71cfebead4584e8d025f5e6b7aaa0

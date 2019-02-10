@@ -23,7 +23,7 @@ public class FallingPiece : MonoBehaviour {
             parent.rect.width * (-0.5f + Random.value),
             (parent.rect.height / 2 + rt.rect.height)
         );
-        float speed = 250 + Random.value * 200;
+        float speed = 4f + Random.value * 4f;
         float rotSpeed = 20 + Random.value * 300;
         if (Random.value < 0.5) rotSpeed *= -1;
 
@@ -34,9 +34,9 @@ public class FallingPiece : MonoBehaviour {
     IEnumerator Fall(float speed, float rotSpeed) {
         Vector2 begin = rt.anchoredPosition;
         Vector2 end = new Vector2(rt.anchoredPosition.x, -parent.rect.height / 2 - rt.rect.height);
-        for(float i = 0; i <= speed; i++) {
+        for(float i = 0; i <= 1.05f; i += Time.deltaTime / speed) {
 
-            rt.anchoredPosition = Vector2.Lerp(begin, end, i / speed);
+            rt.anchoredPosition = Vector2.Lerp(begin, end, i);
             t.Rotate(0, 0, rotSpeed * Time.deltaTime);
             yield return null;
         }
